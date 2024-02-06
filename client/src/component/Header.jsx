@@ -35,7 +35,8 @@ via-purple-500 to-orange-500 rounded-lg text-white"
         <Link to="/login">
           <Button
             className="bg-gradient-to-r from-indigo-600
-via-purple-500 to-blue-500"
+            via-purple-500 to-blue-500"
+            outline
           >
             Sign In
           </Button>
