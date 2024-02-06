@@ -4,14 +4,14 @@ import About from './Pages/About';
 import Login from './Pages/Login';
 import SignUp from './Pages/SignUp';
 import Dashboard from './Pages/Dashboard';
-import Project from './Pages/Project'
-;
-
+import Project from './Pages/Project';
+import Header from './component/Header';
 
 export default function App() {
 
   return (
     <BrowserRouter>
+    <Header />
      <Routes>
 
       <Route path="/" element={<Home />} />
@@ -19,7 +19,7 @@ export default function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/project" element={<Project />} />
+      <Route path="/categories" element={<Project />} />
      </Routes>
         
     </BrowserRouter>
