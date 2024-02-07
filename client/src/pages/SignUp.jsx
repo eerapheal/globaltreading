@@ -2,7 +2,7 @@ import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const SignOut = () => {
+const SignUp = () => {
   const [formData, setFormData] = useState({});
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -126,4 +126,4 @@ via-purple-500 to-orange-500 rounded-lg text-white text-4xl"
   );
 };
 
-export default SignOut;
+export default SignUp;
