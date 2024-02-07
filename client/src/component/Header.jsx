@@ -3,10 +3,12 @@ import { Link, useLocation } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
+import { toggleTheme } from "../redux/theme/themeSlice.js";
 
 const Header = () => {
   const path = useLocation().pathname;
   const { currentUser } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   return (
     <Navbar className="border-b-2">
@@ -66,7 +68,12 @@ via-purple-500 to-orange-500 rounded-lg text-white"
           </Link>
         )}
         <Navbar.Toggle />
-        <Button className=" w-12 h-10 hidden sm:inline" color="gray" pill>
+        <Button
+          className=" w-12 h-10 hidden sm:inline"
+          color="gray"
+          pill
+          onClick={() => dispatch(toggleTheme())}
+        >
           <FaMoon />
         </Button>
       </div>
