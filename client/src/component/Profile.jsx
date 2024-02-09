@@ -10,6 +10,9 @@ import { Button, TextInput, Alert } from "flowbite-react";
 import { app } from "../fireBase";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { updateStart, updateSuccess, updateFailure } from "../redux/user/userSlice";
+import { useDispatch } from "react-redux";
+
 
 const Profile = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -18,7 +21,14 @@ const Profile = () => {
   const filePickerRef = useRef();
   const [imageFileUploadingProgress, setImageFileUploadingProgress] =
     useState(null);
-  const [imageFileUploadingError, setImageFileUploadingError] = useState(null);
+    const [imageFileUploading, setImageFileUploading] =
+    useState(null);
+    const [imageFileUploadingError, setImageFileUploadingError] = useState(null);
+  const [updateUserSuccess, setUpdateUserSuccess] = useState(null)
+  const [updateUserError, setUpdateUserError] = useState(null)
+    const [formData, setFormData] = useState({});
+const dispatch = useDispatch()
+
   const handleIamgeChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -43,6 +53,7 @@ const Profile = () => {
     //     }
     //   }
     // }
+    setImageFileUploading(true)
     setImageFileUploadingError(null);
     const storage = getStorage(app);
     const fileName = new Date().getTime() + imageFile.name;
@@ -59,15 +70,61 @@ const Profile = () => {
       (error) => {
         setImageFileUploadingError("Could not upload image above 2MB");
         setImageFileUploadingError(null);
+        setImageFile(null);
+        imageFileUrl(null);
+        setImageFileUploading(false)
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           setImageFileUrl(downloadURL);
-          setImageFile(null);
-          imageFileUrl(null);
+          setFormData({ ...formData, profilePicture: downloadURL });
+          setImageFileUploading(false)
         });
       }
     );
+  };
+
+  // update data function
+  const handleChange = (e) => {
+    setFormData({...formData, [e.target.id] : e.target.value}) // Corrected
+  }  
+  // submit data
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setUpdateUserError(null);
+  setUpdateUserSuccess(null);
+  if (Object.keys(formData).length === 0) {
+    setUpdateUserError('No change made')
+    return;
+  };
+  if (imageFileUploading) {
+    setUpdateUserError('Please for for image to upload')
+    return
+  };
+  try {
+    dispatch(updateStart());
+      const res = await fetch(`/api/auth/user/update/${currentUser._id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(updateFailure(data.message));
+      }
+
+      if (!res.ok) {
+        dispatch(updateFailure(data.message));
+        setUpdateUserError(data.message);
+      } else {
+        dispatch(updateSuccess(data));
+        setUpdateUserSuccess("User's profile updated successfully")
+      }
+    } catch (error) {
+      dispatch(updateFailure(error.message));
+        setUpdateUserError(data.message);
+    }
   };
 
   return (
@@ -80,7 +137,7 @@ const Profile = () => {
         ref={filePickerRef}
         hidden
       />
-      <form className="flex flex-col gap-4">
+      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <div
           className="w-32 h-32 self-center relative"
           onClick={() => filePickerRef.current.click()}
@@ -126,15 +183,22 @@ const Profile = () => {
           id="username"
           placeholder="username"
           defaultValue={currentUser.username}
+          onChange={handleChange}
         />
         <TextInput
           type="email"
-          id="eamil"
+          id="email"
           placeholder="email"
           defaultValue={currentUser.email}
+          onChange={handleChange}
         />
-        <TextInput type="password" id="password" placeholder="password" />
-        <Button type="sumbmit" gradientDuoTone="purpleToBlue" outline>
+        <TextInput
+          type="password"
+          id="password"
+          placeholder="password"
+          onChange={handleChange}
+        />
+        <Button type="submit" gradientDuoTone="purpleToBlue" outline>
           Update
         </Button>
       </form>
@@ -142,6 +206,16 @@ const Profile = () => {
         <span className="cursor-pointer">Delete Account</span>
         <span className="cursor-pointer">Sign Out</span>
       </div>
+      {updateUserSuccess && (
+        <Alert color='success' className="mt-5">
+          {updateUserSuccess}
+        </Alert>
+      )}
+      {updateUserSuccess && (
+        <Alert color='faliure' className="mt-5">
+          {updateUserSuccess}
+        </Alert>
+      )}
     </div>
   );
 };
