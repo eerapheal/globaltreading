@@ -29,13 +29,13 @@ const Profile = () => {
     const [formData, setFormData] = useState({});
 const dispatch = useDispatch()
 
-  const handleIamgeChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setImageFile(file);
-      setImageFileUrl(URL.createObjectURL(file));
-    }
-  };
+const handleIamgeChange = (e) => {
+  const file = e.target.files[0];
+  if (file) {
+    setImageFile(file);
+    setImageFileUrl(URL.createObjectURL(file));
+  }
+};
   useEffect(() => {
     if (imageFile) {
       uploadImage();
@@ -71,7 +71,7 @@ const dispatch = useDispatch()
         setImageFileUploadingError("Could not upload image above 2MB");
         setImageFileUploadingError(null);
         setImageFile(null);
-        imageFileUrl(null);
+        setImageFileUrl(null);
         setImageFileUploading(false)
       },
       () => {
@@ -86,7 +86,7 @@ const dispatch = useDispatch()
 
   // update data function
   const handleChange = (e) => {
-    setFormData({...formData, [e.target.id] : e.target.value}) // Corrected
+    setFormData({...formData, [e.target.id] : e.target.value})
   }  
   // submit data
 const handleSubmit = async (e) => {
