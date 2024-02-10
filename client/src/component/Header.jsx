@@ -17,12 +17,16 @@ const Header = () => {
         className="self-center whitespace-norap 
 text-sm sm:text-xl font-bold dark:text-white"
       >
-        <span
-          className="px-2 py-1 bg-gradient-to-r from-indigo-600
-via-purple-500 to-orange-500 rounded-lg text-white"
-        >
-          Global Treadings
-        </span>
+        <div className="px-2 py-1 flex items-center">
+          <img
+            className="w-[55px] h-[55px]"
+            src="/images/GT.png"
+            alt="Global Treadings Logo"
+          />
+          <span className="px-2 py-1 bg-gradient-to-r from-indigo-600 via-purple-500 to-orange-500 rounded-lg text-white">
+            Global Treadings
+          </span>
+        </div>
       </Link>
       <form>
         <TextInput
