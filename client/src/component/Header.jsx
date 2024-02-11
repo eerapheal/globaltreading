@@ -4,11 +4,28 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../redux/theme/themeSlice.js";
+import { signOutSuccess } from "../redux/user/userSlice";
 
 const Header = () => {
   const path = useLocation().pathname;
   const { currentUser } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
+  const handleSignout = async () => {
+    try {
+      const res = await fetch("/api/user/signout", {
+        method: "POST",
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        console.error(data.message);
+      } else {
+        dispatch(signOutSuccess("User's profile deleted successfully"));
+      }
+    } catch (error) {
+      throw new Error(error.meggasse);
+    }
+  };
 
   return (
     <Navbar className="border-b-2">
@@ -58,7 +75,7 @@ text-sm sm:text-xl font-bold dark:text-white"
               <Dropdown.Item>Profile</Dropdown.Item>
             </Link>
             <Dropdown.Divider />
-            <Dropdown.Item>Signout</Dropdown.Item>
+            <Dropdown.Item onClick={handleSignout}>Signout</Dropdown.Item>
           </Dropdown>
         ) : (
           <Link to="/login">
