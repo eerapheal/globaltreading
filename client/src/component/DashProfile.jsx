@@ -150,18 +150,17 @@ export default function DashProfile() {
 
   const handleSignout = async () => {
     try {
-      dispatch(deleteUserStart());
       const res = await fetch("/api/user/signout", {
         method: "POST",
       });
       const data = await res.json();
       if (!res.ok) {
-        console.log(data.message);
+        console.error(data.message);
       } else {
         dispatch(signOutSuccess("User's profile deleted successfully"));
       }
     } catch (error) {
-      console.log(error.meggasse);
+      throw new Error(error.meggasse);
     }
   };
   return (
