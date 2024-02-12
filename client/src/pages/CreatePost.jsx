@@ -18,8 +18,11 @@ const CreatePost = () => {
   const [file, setFile] = useState(null);
   const [imageFileUploadProgress, setImageFileUploadProgress] = useState(null);
   const [imageFileUploadError, setImageFileUploadError] = useState(null);
-  const { currentUser, error, loading } = useSelector((state) => state.user);
+  // const {error, loading } = useSelector((state) => state.user);
   const [imageFileUploading, setImageFileUploading] = useState();
+  const [publishError, setPublishError] = useState(null)
+    console.log(formData);
+  
   const handleUploadImage = async () => {
     try {
       setImageFileUploadError("Please select an image");
@@ -64,6 +67,27 @@ const CreatePost = () => {
     }
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch("/api/post/create", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      console.log("Response status:", res.status);
+      const data = await res.json();
+      if (data.success === false) {
+        setPublishError(data.message);
+        return;
+      }
+      if (!res.ok) {
+        setPublishError(null);
+      }
+    } catch (error) {
+      setPublishError("An error occurred");
+    }
+  };
   return (
     <div className="p3 max-w-3xl mx-auto min-h-screen">
       <h1 className="text-center text-3xl my-7 font-bold">Create post</h1>
@@ -75,8 +99,17 @@ const CreatePost = () => {
             required
             id="title"
             className="flex-1"
+            onChange={(e) =>
+              setFormData({ ...formData, title: e.target.value })
+            }
           />
-          <Select required>
+
+          <Select
+            required
+            onChange={(e) =>
+              setFormData({ ...formData, category: e.target.value })
+            }
+          >
             <option value="uncategorized">Select Category</option>
             <option value="sport">Sport</option>
             <option value="health">Health</option>
@@ -98,7 +131,7 @@ const CreatePost = () => {
               size="sm"
               outline
               onClick={handleUploadImage}
-              disable={loading || imageFileUploading ? "true" : "false"}
+              disable={imageFileUploading ? "true" : "false"}
             >
               {imageFileUploadProgress ? (
                 <>
@@ -133,13 +166,20 @@ const CreatePost = () => {
           placeholder="Write your article"
           className="h-72 mb-12"
           required
+          onChange={(value) => setFormData({ ...formData, content: value })}
         />
         <Button
+          onClick={handleSubmit}
           type="submit"
           className="bg-gradient-to-r from-indigo-600 via-purple-500 to-blue-500 rounded-lg border-none"
         >
           Publish
         </Button>
+        {publishError && (
+        <Alert color='faliure' className="mt-5">
+          {publishError}
+        </Alert>
+      )}
       </form>
     </div>
   );
