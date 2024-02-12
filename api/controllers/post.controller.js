@@ -3,7 +3,7 @@ import Post from "../models/post.model.js";
 
 export const create = async (req, res, next) => {
   if (!req.user.isAdmin) {
-    return next(errorHandler(403, "You are not allow to create post"));
+    return next(errorHandler(403, "You are not allowed to create post"));
   }
   if (!req.body.title || !req.body.content) {
     return next(errorHandler(400, "Kindly fill out all field"));
@@ -51,7 +51,7 @@ export const getPost = async (req, res, next) => {
       .skip(startIndex)
       .limit(limit);
 
-    const now = new Date(); // Correctly initialize `now`
+    const now = new Date();
     const oneMonthAgo = new Date(
       now.getFullYear(),
       now.getMonth() - 1,
@@ -66,9 +66,21 @@ export const getPost = async (req, res, next) => {
     res.status(200).json({
       posts,
       totalPosts,
-      LastMonthPosts, // Fixed typo here as well
+      LastMonthPosts,
     });
   } catch (error) {
     next(error);
   }
+};
+
+export const deletepost = async (req, res, next) => {
+  if (!req.user.isAdmin || req.user.id !== req.params.userId) {
+    return next(errorHandler(403, "You are not allowed to delete post"));
+  }
+  try{
+  await Post.findByIdAndDelete(req.params.postId)
+  res.status(200).json("Post deleted successfully")
+  } catch (error) {
+    next(error)
+  };
 };
