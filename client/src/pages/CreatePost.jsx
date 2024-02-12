@@ -9,7 +9,7 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { app } from "../firebase";
-import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
@@ -18,11 +18,10 @@ const CreatePost = () => {
   const [file, setFile] = useState(null);
   const [imageFileUploadProgress, setImageFileUploadProgress] = useState(null);
   const [imageFileUploadError, setImageFileUploadError] = useState(null);
-  // const {error, loading } = useSelector((state) => state.user);
-  const [imageFileUploading, setImageFileUploading] = useState();
-  const [publishError, setPublishError] = useState(null)
-    console.log(formData);
-  
+  const [imageFileUploading, setImageFileUploading] = useState(false);
+  const [publishError, setPublishError] = useState(null);
+  const navigate = useNavigate();
+
   const handleUploadImage = async () => {
     try {
       setImageFileUploadError("Please select an image");
@@ -81,13 +80,16 @@ const CreatePost = () => {
         setPublishError(data.message);
         return;
       }
-      if (!res.ok) {
-        setPublishError(null);
+      if (res.ok) {
+        navigate("/");
+      } else {
+        setPublishError("Failed to create post");
       }
     } catch (error) {
       setPublishError("An error occurred");
     }
   };
+
   return (
     <div className="p3 max-w-3xl mx-auto min-h-screen">
       <h1 className="text-center text-3xl my-7 font-bold">Create post</h1>
@@ -131,7 +133,7 @@ const CreatePost = () => {
               size="sm"
               outline
               onClick={handleUploadImage}
-              disable={imageFileUploading ? "true" : "false"}
+              disabled={imageFileUploadProgress}
             >
               {imageFileUploadProgress ? (
                 <>
@@ -142,7 +144,7 @@ const CreatePost = () => {
                       strokeWidth={5}
                     />
                   </div>
-                  <span className="z-10">Uploading...</span>
+                  <span className="z-10">Uploading</span>
                 </>
               ) : (
                 "Upload image"
@@ -171,15 +173,15 @@ const CreatePost = () => {
         <Button
           onClick={handleSubmit}
           type="submit"
-          className="bg-gradient-to-r from-indigo-600 via-purple-500 to-blue-500 rounded-lg border-none"
+          className=" mb-5 bg-gradient-to-r from-indigo-600 via-purple-500 to-blue-500 rounded-lg border-none"
         >
           Publish
         </Button>
         {publishError && (
-        <Alert color='faliure' className="mt-5">
-          {publishError}
-        </Alert>
-      )}
+          <Alert className="mb-5" color="failure">
+            {publishError}
+          </Alert>
+        )}
       </form>
     </div>
   );
