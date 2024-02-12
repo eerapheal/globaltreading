@@ -66,9 +66,9 @@ const DashSidebar = () => {
             onClick={handleSignout}
           >
             Sign Out
-          </Sidebar.Item>
-          <Link to="/create-post">
-            <Sidebar.Item icon={HiArrowSmRight} className="cursor-pointer">
+          </Sidebar.Item >
+          <Link to="/create-post" >
+            <Sidebar.Item as="div" icon={HiArrowSmRight} className="cursor-pointer">
               Create Post
             </Sidebar.Item>
           </Link>
