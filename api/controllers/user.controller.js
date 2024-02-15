@@ -55,7 +55,8 @@ export const updateUser = async (req, res, next) => {
 };
 
 export const deleteUser = async (req, res, next) => {
-  if (req.user.id !== req.params.userId) {
+  const isAdmin = req.user.isAdmin;
+  if (!isAdmin && req.user.id !== req.params.userId) {
     return next(errorHandler(403, "You are not allowed to delete this user"));
   }
   try {
@@ -90,7 +91,7 @@ export const getusers = async (req, res, next) => {
       .skip(startIndex)
       .limit(limit);
 
-    const usersWithoutPassword = users.map(user => {
+    const usersWithoutPassword = users.map((user) => {
       const { password, ...rest } = user._doc;
       return rest;
     });
