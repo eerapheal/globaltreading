@@ -81,7 +81,7 @@ const CreatePost = () => {
         return;
       }
       if (res.ok) {
-        navigate("/");
+        navigate(`/post/${data.slug}`);
       } else {
         setPublishError("Failed to create post");
       }

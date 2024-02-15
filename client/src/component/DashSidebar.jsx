@@ -1,4 +1,4 @@
-import { Sidebar } from "flowbite-react";
+import { Sidebar, Button} from "flowbite-react";
 import { HiUser, HiArrowSmRight, HiDocumentText } from "react-icons/hi";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -56,7 +56,14 @@ const DashSidebar = () => {
                 labelColor="dark"
                 as="div"
               >
-                Post
+                <Button
+          className="u-full"
+          type="submit"
+          gradientDuoTone="purpleToBlue"
+          outline
+        >
+          Posts
+        </Button>
               </Sidebar.Item>
             </Link>
           )}
@@ -65,13 +72,34 @@ const DashSidebar = () => {
             className="cursor-pointer"
             onClick={handleSignout}
           >
-            Sign Out
+             <Button
+          className="u-full"
+          type="submit"
+          gradientDuoTone="purpleToBlue"
+          outline
+        >
+          Sign Out
+        </Button>
           </Sidebar.Item >
+          {
+            currentUser.isAdmin ?
           <Link to="/create-post" >
-            <Sidebar.Item as="div" icon={HiArrowSmRight} className="cursor-pointer">
-              Create Post
+            <Sidebar.Item as="div" 
+            icon={HiArrowSmRight} 
+            className="cursor-pointer"
+            >
+          <Button
+          className="u-full"
+          type="submit"
+          gradientDuoTone="purpleToBlue"
+          outline
+        >
+          Create Post
+        </Button>
             </Sidebar.Item>
           </Link>
+          : ""
+}
         </Sidebar.ItemGroup>
       </Sidebar.Items>
     </Sidebar>

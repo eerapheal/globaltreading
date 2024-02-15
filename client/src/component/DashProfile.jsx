@@ -203,7 +203,7 @@ export default function DashProfile() {
           <img
             src={imageFileUrl || currentUser.profilePicture}
             alt="user"
-            className={`rounded-full w-full h-full object-cover border-8 border-[lightgray] ${
+            className={`rounded-full w-full h-full object-cover border-4 border-[lightblue] ${
               imageFileUploadProgress &&
               imageFileUploadProgress < 100 &&
               "opacity-60"
@@ -250,17 +250,6 @@ export default function DashProfile() {
           <Alert color="failure" className="mt-5">
             {error}
           </Alert>
-        )}
-        {currentUser.isAdmin && (
-          <Link to="/create-post">
-            <Button
-              type="button"
-              gradientDuoTone="purpleToBlue"
-              className="w-full"
-            >
-              Create post
-            </Button>
-          </Link>
         )}
       </form>
       <div className="text-red-500 flex justify-between mt-5">
