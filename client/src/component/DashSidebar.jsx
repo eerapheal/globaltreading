@@ -1,5 +1,10 @@
-import { Sidebar, Button} from "flowbite-react";
-import { HiUser, HiArrowSmRight, HiDocumentText } from "react-icons/hi";
+import { Sidebar, Button } from "flowbite-react";
+import {
+  HiUser,
+  HiArrowSmRight,
+  HiDocumentText,
+  HiOutlineUserGroup,
+} from "react-icons/hi";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { signOutSuccess } from "../redux/user/userSlice";
@@ -10,6 +15,7 @@ const DashSidebar = () => {
   const location = useLocation();
   const [tab, setTab] = useState("");
   const dispatch = useDispatch();
+
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
     const tabFromUrl = urlParams.get("tab");
@@ -25,14 +31,15 @@ const DashSidebar = () => {
       });
       const data = await res.json();
       if (!res.ok) {
-        console.error(data.message);
+        console.log(data.message);
       } else {
         dispatch(signOutSuccess("User's profile deleted successfully"));
       }
     } catch (error) {
-      throw new Error(error.meggasse);
+      throw new Error(error.message);
     }
   };
+
   return (
     <Sidebar className="w-full md:w-56">
       <Sidebar.Items>
@@ -49,57 +56,74 @@ const DashSidebar = () => {
             </Sidebar.Item>
           </Link>
           {currentUser.isAdmin && (
-            <Link to="/dashboard?tab=posts">
-              <Sidebar.Item
-                active={tab === "posts"}
-                icon={HiDocumentText}
-                labelColor="dark"
-                as="div"
-              >
+            <Sidebar.Item
+              active={tab === "posts"}
+              icon={HiDocumentText}
+              labelColor="dark"
+              as="div"
+            >
+              <Link to="/dashboard?tab=posts">
                 <Button
-          className="u-full"
-          type="submit"
-          gradientDuoTone="purpleToBlue"
-          outline
-        >
-          Posts
-        </Button>
-              </Sidebar.Item>
-            </Link>
+                  className="u-full"
+                  type="submit"
+                  gradientDuoTone="purpleToBlue"
+                  outline
+                >
+                  Posts
+                </Button>
+              </Link>
+            </Sidebar.Item>
           )}
           <Sidebar.Item
             icon={HiArrowSmRight}
             className="cursor-pointer"
             onClick={handleSignout}
           >
-             <Button
-          className="u-full"
-          type="submit"
-          gradientDuoTone="purpleToBlue"
-          outline
-        >
-          Sign Out
-        </Button>
-          </Sidebar.Item >
-          {
-            currentUser.isAdmin ?
-          <Link to="/create-post" >
-            <Sidebar.Item as="div" 
-            icon={HiArrowSmRight} 
-            className="cursor-pointer"
+            <Button
+              className="u-full"
+              type="submit"
+              gradientDuoTone="purpleToBlue"
+              outline
             >
-          <Button
-          className="u-full"
-          type="submit"
-          gradientDuoTone="purpleToBlue"
-          outline
-        >
-          Create Post
-        </Button>
+              Sign Out
+            </Button>
+          </Sidebar.Item>
+          {currentUser.isAdmin && (
+            <Sidebar.Item
+              as="div"
+              icon={HiArrowSmRight}
+              className="cursor-pointer"
+            >
+              <Link to="/create-post">
+                <Button
+                  className="u-full"
+                  type="submit"
+                  gradientDuoTone="purpleToBlue"
+                  outline
+                >
+                  Create Post
+                </Button>
+              </Link>
             </Sidebar.Item>
-          </Link>
-          : ""
-}
+          )}
+          {currentUser.isAdmin && (
+            <Sidebar.Item
+              as="div"
+              icon={HiOutlineUserGroup}
+              className="cursor-pointer"
+            >
+              <Link to="/dashboard?tab=users">
+                <Button
+                  className="u-full"
+                  type="button"
+                  gradientDuoTone="purpleToBlue"
+                  outline
+                >
+                  All Users
+                </Button>
+              </Link>
+            </Sidebar.Item>
+          )}
         </Sidebar.ItemGroup>
       </Sidebar.Items>
     </Sidebar>
