@@ -9,3 +9,32 @@ body {
 .ql-editor {
   font-size: 1.05rem;
 }
+
+.post-content p {
+  margin-bottom: 0.5rem;
+}
+
+.post-content h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: sans-serif, "roboto";
+  margin: 0.5rem;
+}
+
+.post-content h2 {
+  font-size: 1.4rem;
+  font-weight: 500;
+  font-family: sans-serif, "roboto";
+  margin: 0.5rem;
+}
+
+.post-content h3 {
+  font-size: 1.3rem;
+  font-weight: 400;
+  font-family: sans-serif, "roboto";
+  margin: 0.5rem;
+}
+
+.post-content a {
+  color: blue;
+}
