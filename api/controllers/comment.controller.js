@@ -5,9 +5,7 @@ export const comment = async (req, res, next) => {
   try {
     const { content, postId, userId } = req.body;
     if (!postId) {
-      return next(
-        errorHandler(400, "postId is required.")
-      );
+      return next(errorHandler(400, "postId is required."));
     }
 
     if (userId !== req.user.id) {
@@ -15,7 +13,7 @@ export const comment = async (req, res, next) => {
         errorHandler(403, "You are not allowed authorize login to continue")
       );
     }
-    
+
     const newComment = new Comment({
       content,
       postId,
@@ -23,6 +21,19 @@ export const comment = async (req, res, next) => {
     });
     await newComment.save();
     res.status(200).json(newComment);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getPostComment = async (req, res, next) => {
+  try {
+    const comments = await Comment.find({
+      postId: req.params.postId,
+    }).sort({
+      createdAt: -1,
+    });
+    res.status(200).json(comments)
   } catch (error) {
     next(error);
   }
