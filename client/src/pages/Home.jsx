@@ -1,10 +1,12 @@
-import { useState } from "react";
+import React from 'react'
+import CallToAction from '../component/CallToAction'
+
 const Home = () => {
   return (
-    <>
-      <h1 className="text-3xl text-red-500">Home</h1>
-    </>
-  );
-};
+    <div>
+      <CallToAction />
+    </div>
+  )
+}
 
-export default Home;
+export default Home
