@@ -76,7 +76,7 @@ const PostPage = () => {
       </div>
       </section>
       <section>
-        <Comment />
+        <Comment postId={post && post._id}/>
       </section>
     </main>
   );
