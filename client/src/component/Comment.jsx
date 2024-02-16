@@ -1,5 +1,5 @@
 import { Alert, Button, TextInput } from "flowbite-react";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -9,7 +9,8 @@ const Comment = ({ postId }) => {
   const [comment, setComment] = useState("");
   const [commentError, setCommentError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
-
+  const [comments, setComments] = useState([]);
+  console.log(comments);
   const handleSubmitComment = async (e) => {
     e.preventDefault();
     if (comment.length > 210) {
@@ -17,7 +18,6 @@ const Comment = ({ postId }) => {
       return;
     }
     try {
-
       const res = await fetch("/api/comment/comment", {
         method: "POST",
         headers: {
@@ -32,7 +32,7 @@ const Comment = ({ postId }) => {
       const data = await res.json();
       if (res.ok) {
         setComment("");
-        setCommentError(null)
+        setCommentError(null);
         setSuccessMessage("Comment submitted successfully!");
         setTimeout(() => {
           setSuccessMessage(null);
@@ -42,6 +42,20 @@ const Comment = ({ postId }) => {
       setCommentError(error.message);
     }
   };
+  useEffect(() => {
+    const getComments = async () => {
+      try {
+        const res = await fetch(`/api/comment/getPostComment/${postId}`);
+        if (res.ok) {
+          const data = await res.json();
+          setComments(data);
+        }
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    };
+    getComments();
+  }, [postId]);
 
   return (
     <div className="max-w-2xl mx-auto w-full p-3">
@@ -81,13 +95,31 @@ const Comment = ({ postId }) => {
             <Button gradientDuoTone="purpleToBlue" outline type="submit">
               Send
             </Button>
-          </div> {
-            commentError &&
-          <Alert color="failure" className="mt-5">{commentError}</Alert>
-          }
-           {successMessage && <Alert className="mt-5" color="success">{successMessage}</Alert>}
+          </div>{" "}
+          {commentError && (
+            <Alert color="failure" className="mt-5">
+              {commentError}
+            </Alert>
+          )}
+          {successMessage && (
+            <Alert className="mt-5" color="success">
+              {successMessage}
+            </Alert>
+          )}
         </form>
       )}
+      <div>
+        {comments.length === 0 ? (
+          <p>Leave a comment</p>
+        ) : (
+          <div className="flex gap-1 items-center mt-3">
+            <p>Comments:</p>
+            <div className=" items-center font-bold">
+              <p>{comments.length}</p>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
