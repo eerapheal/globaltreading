@@ -3,13 +3,19 @@ import Comment from "../models/Comment.js";
 
 export const comment = async (req, res, next) => {
   try {
+    const { content, postId, userId } = req.body;
+    if (!postId) {
+      return next(
+        errorHandler(400, "postId is required.")
+      );
+    }
+
     if (userId !== req.user.id) {
       return next(
         errorHandler(403, "You are not allowed authorize login to continue")
       );
     }
     
-    const { content, postId, userId } = req.body;
     const newComment = new Comment({
       content,
       postId,
