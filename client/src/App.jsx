@@ -12,10 +12,12 @@ import AdminPrivateRoute from "./component/AdminPrivateRoute";
 import CreatePost from "./Pages/CreatePost";
 import UpdatePost from "./Pages/UpdatePost";
 import PostPage from "./Pages/PostPage";
+import ScrollTop from "./component/ScrollTop";
 
 export default function App() {
   return (
     <BrowserRouter>
+    <ScrollTop />
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -28,8 +30,8 @@ export default function App() {
         <Route element={<AdminPrivateRoute />}>
           <Route path="/create-post" element={<CreatePost />} />
           <Route path="/update-post/:postId" element={<UpdatePost />} />
-          <Route path="/post/:postSlug" element={<PostPage />} />
         </Route>
+        <Route path="/post/:postSlug" element={<PostPage />} />
         <Route path="/categories" element={<Project />} />
       </Routes>
       <Footers />
