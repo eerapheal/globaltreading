@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import CommentCard from "./commentCard";
 
 const Comment = ({ postId }) => {
   const { currentUser } = useSelector((state) => state.user);
@@ -10,11 +11,10 @@ const Comment = ({ postId }) => {
   const [commentError, setCommentError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
   const [comments, setComments] = useState([]);
-  console.log(comments);
   const handleSubmitComment = async (e) => {
     e.preventDefault();
     if (comment.length > 210) {
-      setCommentError("Comment must be 250 characters or less.");
+      setCommentError("Comment must be 210 characters or less.");
       return;
     }
     try {
@@ -34,6 +34,7 @@ const Comment = ({ postId }) => {
         setComment("");
         setCommentError(null);
         setSuccessMessage("Comment submitted successfully!");
+        setComments([data, ...comments]);
         setTimeout(() => {
           setSuccessMessage(null);
         }, 3000);
@@ -58,7 +59,7 @@ const Comment = ({ postId }) => {
   }, [postId]);
 
   return (
-    <div className="max-w-2xl mx-auto w-full p-3">
+    <div className="max-w-6xl mx-auto w-full p-3">
       {currentUser ? (
         <div className="flex items-center gap-1 my-5">
           <img
@@ -84,8 +85,8 @@ const Comment = ({ postId }) => {
         >
           <TextInput
             placeholder="Drop a comment...."
-            rows="3"
-            maxLength="250"
+            // rows="3"
+            maxLength="210"
             onChange={(e) => setComment(e.target.value)}
           />
           <div className=" flex justify-between items-center">
@@ -112,12 +113,20 @@ const Comment = ({ postId }) => {
         {comments.length === 0 ? (
           <p>Leave a comment</p>
         ) : (
-          <div className="flex gap-1 items-center mt-3">
-            <p>Comments:</p>
-            <div className=" items-center font-bold">
-              <p>{comments.length}</p>
+          <>
+            <div className="flex gap-1 items-center mt-3">
+              <p>Comments:</p>
+              <div className=" items-center font-bold">
+                <p>{comments.length}</p>
+              </div>
             </div>
-          </div>
+
+            <div>
+              {comments.map((comment) => (
+                <CommentCard key={comment._id} comment={comment} />
+              ))}
+            </div>
+          </>
         )}
       </div>
     </div>
