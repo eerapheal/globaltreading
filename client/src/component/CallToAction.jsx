@@ -13,15 +13,15 @@ const CallToAction = () => {
         </h2>
         <p className="text-white text-2xl font-semibold">
           <span>Santtech</span> offers full-stack Website design, SEO, graphics,
-          content creation, and brand awareness services
+          content creation, and brand awareness services with amazing prize
         </p>
         <Button
           outline
           className="border-none w-full bg-gradient-to-r from-indigo-600
             via-purple-500 to-blue-500"
         >
-          <a href="http://srmsport" target="_blank" rel="noopener noreferrer">
-            Reach out to us
+          <a href="https://www.linkedin.com/in/ekpenisiraphael/" alt="@ekpenisiraphael" target="_blank" rel="noopener noreferrer">
+            Click here to reach out to us now.
           </a>
         </Button>
       </div>

@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 const Footers = () => {
   return (
-    <Footer container>
+    <Footer container className="mt-5">
       <div className="w-full border border-t-transparent border-b-2 p-5 border-cyan-500">
         <div className="grid w-full gap-5 justify-around sm:flex sm:justify-around md:flex md:grid-cols-1">
           <div className="mb-6 sm:mb-auto flex-1">
@@ -45,14 +45,14 @@ text-sm sm:text-xl font-bold dark:text-white"
                 <Footer.Link href="#">Our Team</Footer.Link>
                 <Footer.Link href="#">Write For Us</Footer.Link>
                 <Footer.Link href="#">Global Treadings</Footer.Link>
-                <Footer.Link href="#">Website Design</Footer.Link>
+                <Footer.Link href="https://github.com/eerapheal">Website Design</Footer.Link>
               </Footer.LinkGroup>
             </div>
             <div>
               <Footer.Title title="Follow us" />
               <Footer.LinkGroup col>
                 <Footer.Link
-                  href="#"
+                  href="facebook.com/globaltreadings"
                   target="_blank"
                   rel="noopener noreferrer"
                   alt="social icon"
@@ -61,7 +61,7 @@ text-sm sm:text-xl font-bold dark:text-white"
                   Facebook
                 </Footer.Link>
                 <Footer.Link
-                  href="#"
+                  href="https://twitter.com/EkpenisiErue"
                   target="_blank"
                   rel="noopener noreferrer"
                   alt="social icon"
@@ -69,7 +69,7 @@ text-sm sm:text-xl font-bold dark:text-white"
                   Twitter
                 </Footer.Link>
                 <Footer.Link
-                  href="#"
+                  href="https://www.linkedin.com/company/globaltreadings"
                   target="_blank"
                   rel="noopener noreferrer"
                   alt="social icon"
@@ -77,7 +77,7 @@ text-sm sm:text-xl font-bold dark:text-white"
                   LinkedIn
                 </Footer.Link>
                 <Footer.Link
-                  href="#"
+                  href=""
                   target="_blank"
                   rel="noopener noreferrer"
                   alt="social icon"
@@ -85,7 +85,7 @@ text-sm sm:text-xl font-bold dark:text-white"
                   YouTube
                 </Footer.Link>
                 <Footer.Link
-                  href="#"
+                  href="https://www.youtube.com/channel/UC4kvJ-oD7LqGyoO4cXoHzZw"
                   target="_blank"
                   rel="noopener noreferrer"
                   alt="social icon"
@@ -114,35 +114,35 @@ text-sm sm:text-xl font-bold dark:text-white"
           />
           <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
             <Footer.Icon
-              href="#"
+              href="facebook.com/globaltreadings"
               target="_blank"
               rel="noopener noreferrer"
               alt="social icon"
               icon={BsFacebook}
             />
             <Footer.Icon
-              href="#"
+              href="https://www.instagram.com/03globaltrendings"
               target="_blank"
               rel="noopener noreferrer"
               alt="social icon"
               icon={BsInstagram}
             />
             <Footer.Icon
-              href="#"
+              href="https://twitter.com/EkpenisiErue"
               target="_blank"
               rel="noopener noreferrer"
               alt="social icon"
               icon={BsTwitter}
             />
             <Footer.Icon
-              href="#"
+              href="https://www.youtube.com/channel/UC4kvJ-oD7LqGyoO4cXoHzZw"
               target="_blank"
               rel="noopener noreferrer"
               alt="social icon"
               icon={BsYoutube}
             />
             <Footer.Icon
-              href="#"
+              href="https://www.linkedin.com/company/globaltreadings"
               target="_blank"
               rel="noopener noreferrer"
               alt="social icon"
