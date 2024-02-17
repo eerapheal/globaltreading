@@ -71,11 +71,11 @@ const PostPage = () => {
         />
       </section>
       <section>
-      <div className="max-x4xl  mx-auto w-full">
+      <div className="max-x4xl  mx-auto w-full p-5 border-b  border-t border-slate-500">
         <CallToAction />
       </div>
       </section>
-      <section>
+      <section className="p-5 border-b border-slate-500">
         <Comment postId={post && post._id}/>
       </section>
     </main>

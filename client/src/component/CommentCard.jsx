@@ -19,7 +19,7 @@ const CommentCard = ({ comment }) => {
   }, [comment]);
 
   return (
-    <div className="">
+    <div className=" p-1">
       <div className="flex items-center gap-2">
         <div>
           <img
@@ -35,7 +35,7 @@ const CommentCard = ({ comment }) => {
         </div>
         <span>{moment(comment.createdAt).fromNow().slice(0, 9)}</span>
       </div>
-      <p className="overflow-hidden">{comment.content}</p>
+      <p className="">{comment.content}</p>
     </div>
   );
 };
