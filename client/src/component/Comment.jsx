@@ -59,7 +59,7 @@ const Comment = ({ postId }) => {
   }, [postId]);
 
   return (
-    <div className="max-w-6xl mx-auto w-full p-3">
+    <div className="max-w-2xl mx-auto w-full p-3">
       {currentUser ? (
         <div className="flex items-center gap-1 my-5">
           <img
@@ -121,7 +121,7 @@ const Comment = ({ postId }) => {
               </div>
             </div>
 
-            <div>
+            <div style={{ wordWrap: "break-word" }}>
               {comments.map((comment) => (
                 <CommentCard key={comment._id} comment={comment} />
               ))}
