@@ -3,7 +3,7 @@ import errorHandler from "../utils/error.js";
 import User from "../models/user.model.js";
 
 export const test = (req, res) => {
-  res.json({ message: "API is working!" });
+  res.json({ message: "API is working! happy coding" });
 };
 
 export const updateUser = async (req, res, next) => {
@@ -111,6 +111,19 @@ export const getusers = async (req, res, next) => {
       totalUsers,
       LastMonthUsers,
     });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getUser = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.userId);
+    if (!user) {
+      return next(errorHandler(404, "User not found"));
+    }
+    const { password, ...rest } = user._doc;
+    res.status(200).json(rest);
   } catch (error) {
     next(error);
   }
