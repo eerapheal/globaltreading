@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import moment from "moment";
 import { FaThumbsUp } from "react-icons/fa";
+import { useSelector } from "react-redux";
+
 const CommentCard = ({ comment, onLike }) => {
+  const { currentUser } = useSelector((state) => state.user);
   const [user, setUser] = useState({});
 
   useEffect(() => {
@@ -37,14 +40,24 @@ const CommentCard = ({ comment, onLike }) => {
         <span>{moment(comment.createdAt).fromNow().slice(0, 9)}</span>
       </div>
       <p className="">{comment.content}</p>
-      <div>
+      <div className="flex items-center text-xs gap-1 p-1">
         <button
           type="button"
           onClick={() => onLike(comment._id)}
-          className="text-gray-400 hover:text-blue-600"
+          className={`text-gray-400 hover:text-blue-400 ${
+            currentUser && comment.likes.includes(currentUser._id)
+              ? "text-blue-600"
+              : ""
+          }`}
         >
           <FaThumbsUp />
         </button>
+        <p>
+          {comment.numberOfLikes > 0 &&
+            comment.numberOfLikes +
+              " " +
+              (comment.numberOfLikes === 1 ? "like" : "likes")}
+        </p>
       </div>
     </div>
   );
