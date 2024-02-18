@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import moment from "moment";
-
-const CommentCard = ({ comment }) => {
+import { FaThumbsUp } from "react-icons/fa";
+const CommentCard = ({ comment, onLike }) => {
   const [user, setUser] = useState({});
+
   useEffect(() => {
     const getUser = async () => {
       try {
@@ -36,6 +37,15 @@ const CommentCard = ({ comment }) => {
         <span>{moment(comment.createdAt).fromNow().slice(0, 9)}</span>
       </div>
       <p className="">{comment.content}</p>
+      <div>
+        <button
+          type="button"
+          onClick={() => onLike(comment._id)}
+          className="text-gray-400 hover:text-blue-600"
+        >
+          <FaThumbsUp />
+        </button>
+      </div>
     </div>
   );
 };

@@ -2,7 +2,7 @@ import { Alert, Button, TextInput } from "flowbite-react";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CommentCard from "./commentCard";
 
 const Comment = ({ postId }) => {
@@ -11,6 +11,8 @@ const Comment = ({ postId }) => {
   const [commentError, setCommentError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
   const [comments, setComments] = useState([]);
+  const navigate = useNavigate();
+
   const handleSubmitComment = async (e) => {
     e.preventDefault();
     if (comment.length > 210) {
@@ -58,6 +60,36 @@ const Comment = ({ postId }) => {
     getComments();
   }, [postId]);
 
+  const handleLikes = async (commentId) => {
+    try {
+      if (!currentUser) {
+        navigate("/login");
+        return;
+      }
+
+      const res = await fetch(`/api/likeComment/likeComment/${commentId}`, {
+        method: "PUT",
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        setComments(
+          comments.map((comment) =>
+            comment._id === commentId
+              ? {
+                  ...comment,
+                  likes: data.likes,
+                  numberOfLikes: data.likes.length,
+                }
+              : comment
+          )
+        );
+      }
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  };
+
   return (
     <div className="max-w-2xl mx-auto w-full p-3">
       {currentUser ? (
@@ -85,7 +117,7 @@ const Comment = ({ postId }) => {
         >
           <TextInput
             placeholder="Drop a comment...."
-            // rows="3"
+            rows="3"
             maxLength="210"
             onChange={(e) => setComment(e.target.value)}
           />
@@ -123,7 +155,11 @@ const Comment = ({ postId }) => {
 
             <div style={{ wordWrap: "break-word" }}>
               {comments.map((comment) => (
-                <CommentCard key={comment._id} comment={comment} />
+                <CommentCard
+                  key={comment._id}
+                  comment={comment}
+                  onLike={handleLikes}
+                />
               ))}
             </div>
           </>
