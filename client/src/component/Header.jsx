@@ -67,9 +67,6 @@ text-sm sm:text-xl font-bold dark:text-white"
           >
             <Dropdown.Header>
               <span className="block text-sm">{currentUser.username}</span>
-              <span className="block textsm font-medium truncate">
-                {currentUser.email}
-              </span>
             </Dropdown.Header>
             <Link to="/dashboard?tab=profile">
               <Dropdown.Item>Profile</Dropdown.Item>
