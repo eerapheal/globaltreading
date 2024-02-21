@@ -5,7 +5,7 @@ import { MdOutlineDeleteOutline } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { Textarea, Button } from "flowbite-react";
 
-const CommentCard = ({ comment, onLike, onEdit }) => {
+const CommentCard = ({ comment, onLike, onEdit, onDelete }) => {
   const { currentUser } = useSelector((state) => state.user);
   const [user, setUser] = useState({});
   const [upDating, setUpDating] = useState(false);
@@ -129,15 +129,13 @@ const CommentCard = ({ comment, onLike, onEdit }) => {
                   </button>
                 )}
 
-              {currentUser &&
-                (currentUser.id === comment.userId || currentUser.isAdmin) && (
-                  <button
-                    type="button"
-                    className="text-red-400 hover:text-red-700"
-                  >
-                    <MdOutlineDeleteOutline />
-                  </button>
-                )}
+              <button
+                type="button"
+                className="text-red-400 hover:text-red-700 text-xl"
+                onClick={() => onDelete(comment._id)}
+              >
+                <MdOutlineDeleteOutline />
+              </button>
             </div>
           </div>
         </>
