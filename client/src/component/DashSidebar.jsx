@@ -5,6 +5,7 @@ import {
   HiDocumentText,
   HiOutlineUserGroup,
   HiAnnotation,
+  HiChartPie,
 } from "react-icons/hi";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -45,17 +46,43 @@ const DashSidebar = () => {
     <Sidebar className="w-full md:w-56">
       <Sidebar.Items>
         <Sidebar.ItemGroup className="flex flex-col gap-1">
-          <Link to="/dashboard?tab=profile">
+          {currentUser.isAdmin && (
             <Sidebar.Item
-              active={tab === "profile"}
-              icon={HiUser}
-              label={currentUser.isAdmin ? "Admin" : "User"}
+              active={tab === "dashboard-view"}
+              icon={HiChartPie}
               labelColor="dark"
               as="div"
             >
-              Profile
+              <Link to="/dashboard?tab=dashboard-view">
+                <Button
+                  className="u-full"
+                  type="submit"
+                  gradientDuoTone="purpleToBlue"
+                  outline
+                >
+                  Dashboard
+                </Button>
+              </Link>
             </Sidebar.Item>
-          </Link>
+          )}
+          <Sidebar.Item
+            active={tab === "profile"}
+            icon={HiUser}
+            label={currentUser.isAdmin ? "Admin" : "User"}
+            labelColor="dark"
+            as="div"
+          >
+            <Link to="/dashboard?tab=profile">
+              <Button
+                className="u-full"
+                type="submit"
+                gradientDuoTone="purpleToBlue"
+                outline
+              >
+                Profile
+              </Button>
+            </Link>
+          </Sidebar.Item>
           {currentUser.isAdmin && (
             <Sidebar.Item
               active={tab === "posts"}
@@ -91,7 +118,7 @@ const DashSidebar = () => {
           </Sidebar.Item>
           {currentUser.isAdmin && (
             <Sidebar.Item
-              active={tab === "posts"}
+              active={tab === "comment"}
               icon={HiAnnotation}
               labelColor="dark"
               as="div"
@@ -110,6 +137,7 @@ const DashSidebar = () => {
           )}
           {currentUser.isAdmin && (
             <Sidebar.Item
+              active={tab === "create-post"}
               as="div"
               icon={HiArrowSmRight}
               className="cursor-pointer"
