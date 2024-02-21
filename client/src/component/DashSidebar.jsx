@@ -4,6 +4,7 @@ import {
   HiArrowSmRight,
   HiDocumentText,
   HiOutlineUserGroup,
+  HiAnnotation,
 } from "react-icons/hi";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -88,6 +89,25 @@ const DashSidebar = () => {
               Sign Out
             </Button>
           </Sidebar.Item>
+          {currentUser.isAdmin && (
+            <Sidebar.Item
+              active={tab === "posts"}
+              icon={HiAnnotation}
+              labelColor="dark"
+              as="div"
+            >
+              <Link to="/dashboard?tab=all-comment">
+                <Button
+                  className="u-full"
+                  type="submit"
+                  gradientDuoTone="purpleToBlue"
+                  outline
+                >
+                  Comment
+                </Button>
+              </Link>
+            </Sidebar.Item>
+          )}
           {currentUser.isAdmin && (
             <Sidebar.Item
               as="div"

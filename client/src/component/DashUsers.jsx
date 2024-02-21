@@ -22,7 +22,7 @@ const DashUsers = () => {
           }
         }
       } catch (error) {
-        console.Error(error.message);
+        throw new Error(error.message);
       }
     };
     if (currentUser.isAdmin) {
@@ -42,7 +42,7 @@ const DashUsers = () => {
         }
       }
     } catch (error) {
-      console.Error(error.message);
+      throw new Error(error.message);
     }
   };
 
@@ -57,12 +57,12 @@ const DashUsers = () => {
       });
       const data = await res.json();
       if (!res.ok) {
-        console.Error(data.message);
+        throw new Error(data.message);
       } setUsers((prev) =>
       prev.filter((user) => user._id !== userIdToDelete)
     );
     } catch (error) {
-      console.Error(error.message);
+      throw new Error(error.message);
     }
   };
 
