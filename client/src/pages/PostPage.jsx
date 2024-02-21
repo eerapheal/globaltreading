@@ -3,12 +3,14 @@ import { useParams, Link } from "react-router-dom";
 import { Spinner, Button } from "flowbite-react";
 import CallToAction from "../component/CallToAction";
 import Comment from "../component/Comment";
+import PostCard from "../component/PostCard";
 
 const PostPage = () => {
   const { postSlug } = useParams();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [post, setPost] = useState(null);
+  const [recentPost, setRecentPost] = useState(null);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -34,6 +36,25 @@ const PostPage = () => {
     fetchPost();
   }, [postSlug]);
 
+  useEffect(() => {
+    const fetchRecentPost = async () => {
+      try {
+        setLoading(true);
+        const res = await fetch(`/api/post/getpost?limit=3`);
+        const data = await res.json();
+        if (res.ok) {
+          setRecentPost(data.posts);
+        }
+        setLoading(false);
+      } catch (error) {
+        setError(true);
+        setLoading(false);
+      }
+    };
+
+    fetchRecentPost();
+  }, []);
+
   if (loading)
     return (
       <div className="flex justify-center items-center min-h-screen">
@@ -51,7 +72,7 @@ const PostPage = () => {
           to={`./search?category=${post && post.category}`}
         >
           <Button className="" color="gray" pill size="xs">
-            {post && post.category}
+            {post && post.category.toUpperCase()}
           </Button>
         </Link>
         <img
@@ -71,12 +92,21 @@ const PostPage = () => {
         />
       </section>
       <section>
-      <div className="max-x4xl  mx-auto w-full p-5 border-b  border-t border-slate-500">
-        <CallToAction />
-      </div>
+        <div className="max-x4xl  mx-auto w-full p-5 border-b  border-t border-slate-500">
+          <CallToAction />
+        </div>
       </section>
       <section className="p-5 border-b border-slate-500">
-        <Comment postId={post && post._id}/>
+        <Comment postId={post && post._id} />
+      </section>
+      <section>
+        <div className="flex flex-col justify-center items-center mb-5">
+          <h1 className="text-xl mt-5">Recent Post</h1>
+        </div>
+        <div className="flex flex-wrap gap-5 mt-5 justify-center">
+          {recentPost &&
+            recentPost.map((post) => <PostCard key={post._id} post={post} />)}
+        </div>
       </section>
     </main>
   );
