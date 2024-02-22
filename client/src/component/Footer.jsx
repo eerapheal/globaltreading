@@ -43,8 +43,8 @@ text-sm sm:text-xl font-bold dark:text-white"
               <Footer.Title title="about" />
               <Footer.LinkGroup col>
                 <Footer.Link href="#">Our Team</Footer.Link>
-                <Footer.Link href="#">Write For Us</Footer.Link>
-                <Footer.Link href="#">Global Treadings</Footer.Link>
+                <Footer.Link href="/about">Join Us</Footer.Link>
+                <Footer.Link href="/">Global Treadings</Footer.Link>
                 <Footer.Link href="https://github.com/eerapheal">Website Design</Footer.Link>
               </Footer.LinkGroup>
             </div>
@@ -52,7 +52,7 @@ text-sm sm:text-xl font-bold dark:text-white"
               <Footer.Title title="Follow us" />
               <Footer.LinkGroup col>
                 <Footer.Link
-                  href="facebook.com/globaltreadings"
+                  href="https://www.facebook.com/globaltreadings"
                   target="_blank"
                   rel="noopener noreferrer"
                   alt="social icon"
@@ -77,7 +77,7 @@ text-sm sm:text-xl font-bold dark:text-white"
                   LinkedIn
                 </Footer.Link>
                 <Footer.Link
-                  href=""
+                  href="https://www.youtube.com/channel/UC4kvJ-oD7LqGyoO4cXoHzZw"
                   target="_blank"
                   rel="noopener noreferrer"
                   alt="social icon"
@@ -85,7 +85,7 @@ text-sm sm:text-xl font-bold dark:text-white"
                   YouTube
                 </Footer.Link>
                 <Footer.Link
-                  href="https://www.youtube.com/channel/UC4kvJ-oD7LqGyoO4cXoHzZw"
+                  href="https://www.instagram.com/03globaltrendings/"
                   target="_blank"
                   rel="noopener noreferrer"
                   alt="social icon"
@@ -114,35 +114,35 @@ text-sm sm:text-xl font-bold dark:text-white"
           />
           <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
             <Footer.Icon
-              href="facebook.com/globaltreadings"
+              href="https://www.facebook.com/globaltreadings/"
               target="_blank"
               rel="noopener noreferrer"
               alt="social icon"
               icon={BsFacebook}
             />
             <Footer.Icon
-              href="https://www.instagram.com/03globaltrendings"
+              href="https://www.instagram.com/03globaltrendings/"
               target="_blank"
               rel="noopener noreferrer"
               alt="social icon"
               icon={BsInstagram}
             />
             <Footer.Icon
-              href="https://twitter.com/EkpenisiErue"
+              href="https://twitter.com/EkpenisiErue/"
               target="_blank"
               rel="noopener noreferrer"
               alt="social icon"
               icon={BsTwitter}
             />
             <Footer.Icon
-              href="https://www.youtube.com/channel/UC4kvJ-oD7LqGyoO4cXoHzZw"
+              href="https://www.youtube.com/channel/UC4kvJ-oD7LqGyoO4cXoHzZw/"
               target="_blank"
               rel="noopener noreferrer"
               alt="social icon"
               icon={BsYoutube}
             />
             <Footer.Icon
-              href="https://www.linkedin.com/company/globaltreadings"
+              href="https://www.linkedin.com/company/globaltreadings/"
               target="_blank"
               rel="noopener noreferrer"
               alt="social icon"
