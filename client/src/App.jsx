@@ -13,17 +13,19 @@ import CreatePost from "./Pages/CreatePost";
 import UpdatePost from "./Pages/UpdatePost";
 import PostPage from "./Pages/PostPage";
 import ScrollTop from "./component/ScrollTop";
+import Search from "./pages/Search";
 
 export default function App() {
   return (
     <BrowserRouter>
-    <ScrollTop />
+      <ScrollTop />
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/search" element={<Search />} />
         <Route element={<PrivateRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
         </Route>
