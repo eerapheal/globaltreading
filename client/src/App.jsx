@@ -9,7 +9,7 @@ import Footers from "./component/Footer";
 import PrivateRoute from "./component/PrivateRoute";
 import AdminPrivateRoute from "./component/AdminPrivateRoute";
 import CreatePost from "./pages/CreatePost";
-import UpdatePost from "./pages/UpdatePost";
+import UpdatePost from "./pages/updatePost";
 import PostPage from "./pages/PostPage";
 import ScrollTop from "./component/ScrollTop";
 import Search from "./pages/Search";
