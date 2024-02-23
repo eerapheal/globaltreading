@@ -53,13 +53,13 @@ const Header = () => {
         className="self-center whitespace-norap 
 text-sm sm:text-xl font-bold dark:text-white"
       >
-        <div className="px-2 py-1 flex items-center">
+        <div className="px-1 py-1 flex items-center">
           <img
-            className="w-[55px] h-[55px]"
+            className="w-40px] h-[40px]"
             src="/images/GT.png"
             alt="Global Treadings Logo"
           />
-          <span className="px-2 py-1 bg-gradient-to-r from-indigo-600 via-purple-500 to-blue-500 rounded-lg text-white">
+          <span className="px-1 py-1 bg-gradient-to-r from-indigo-600 via-purple-500 to-blue-500 rounded-lg text-white">
             Global Treadings
           </span>
         </div>
@@ -74,7 +74,7 @@ text-sm sm:text-xl font-bold dark:text-white"
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </form>
-      <Button className=" w-12 h-10 lg:hidden" color="gray" pill>
+      <Button className=" w-12 h-10 hidden sm:flex" color="gray" pill>
         <AiOutlineSearch />
       </Button>
       <div className="flex gap-2 md:order-2">
@@ -97,17 +97,13 @@ text-sm sm:text-xl font-bold dark:text-white"
           </Dropdown>
         ) : (
           <Link to="/login">
-            <button
-              className="bg-gradient-to-r from-indigo-600
-            via-purple-500 to-blue-500 font-sm  sm:font-semibold" 
-            >
-              SignIn
-            </button>
+               <Button className="bg-gradient-to-r text-center from-indigo-600
+            via-purple-500 to-blue-500 border rounded-2xl ">SignIn</Button>
           </Link>
         )}
         <Navbar.Toggle />
         <Button
-          className=" w-12 h-10 hidden sm:inline"
+          className=" w-12 h-10 hidden sm:flex"
           color="gray"
           pill
           onClick={() => dispatch(toggleTheme())}
