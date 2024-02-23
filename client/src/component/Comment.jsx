@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import CommentCard from "./commentCard";
+import CommentCard from "./CommentCard";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 
 const Comment = ({ postId }) => {
