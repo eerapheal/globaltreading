@@ -97,13 +97,12 @@ text-sm sm:text-xl font-bold dark:text-white"
           </Dropdown>
         ) : (
           <Link to="/login">
-            <Button
+            <button
               className="bg-gradient-to-r from-indigo-600
-            via-purple-500 to-blue-500"
-              outline
+            via-purple-500 to-blue-500 font-sm  sm:font-semibold" 
             >
-              Sign In
-            </Button>
+              SignIn
+            </button>
           </Link>
         )}
         <Navbar.Toggle />
