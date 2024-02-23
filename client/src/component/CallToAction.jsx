@@ -31,7 +31,7 @@ const CallToAction = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Click here to reach out to us now.
+              Contact us now.
             </a>
           </Button>
         </div>
