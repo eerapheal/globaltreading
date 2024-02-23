@@ -8,7 +8,6 @@ import commentRoutes from "./routes/comment.route.js";
 import likeCommentRoutes from "./routes/likeComment.route.js";
 import cookieParser from "cookie-parser";
 import path from "path";
-import fs from "fs";
 
 dotenv.config();
 
@@ -50,36 +49,5 @@ app.use((err, req, res, next) => {
     success: false,
     statusCode,
     message,
-  });
-});
-
-app.get('/*', (req, res, next) => {
-  fs.readFile(path.join(__dirname, "client", "dist", "index.html"), 'utf8', async (err, htmlData) => {
-      if (err) {
-          console.error('Error during file reading', err);
-          return res.status(404).end()
-      }
-      // Get post info based on the request or query parameters, assuming you have a function to retrieve post info
-      const postId = req.query.id;
-      try {
-        const post = await getPost(postId);
-        if (!post) {
-          console.log("Post not found");
-          return res.status(404).send("Post not found");
-        }
-
-        console.log("Post found:", post); // Add this line to display the found post
-        // Inject meta tags
-        htmlData = htmlData.replace(
-            /<title>[\s\S]*?<\/title>/,
-            `<title>${post.title}</title>`
-        )
-        .replace(/__META_OG_TITLE__/g, post.title)
-        .replace(/__META_OG_IMAGE__/g, post.image);
-        return res.send(htmlData);
-      } catch (error) {
-        console.error("Error fetching post:", error);
-        return res.status(500).send("Internal Server Error");
-      }
   });
 });
