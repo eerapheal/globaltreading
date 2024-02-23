@@ -4,6 +4,7 @@ import { Spinner, Button } from "flowbite-react";
 import CallToAction from "../component/CallToAction";
 import Comment from "../component/Comment";
 import PostCard from "../component/PostCard";
+import SEO from "../metaSeo";
 
 const PostPage = () => {
   const { postSlug } = useParams();
@@ -63,6 +64,15 @@ const PostPage = () => {
     );
   return (
     <main className="p-3 flex flex-col max-w-6xl mx-auto min-h-screen">
+      <SEO
+        title={post && post.title.slice(0, 58)}
+        description={post && post.title.slice(0, 156)}
+        name="Global treadings"
+        type="Website"
+        imageUrl={post && post.image}
+        url={window.location.href}
+      />
+
       <section>
         <h1 className=" text-2xl mt-8 p-3 font-roboto max-w-2xl mx-auto">
           {post && post.title}
