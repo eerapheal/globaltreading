@@ -15,6 +15,7 @@ import PostPage from "./pages/PostPage";
 import ScrollTop from "./component/ScrollTop";
 import Search from "./pages/Search";
 import Home from "./pages/Home";
+import PolicyTerms from "./pages/PolicyTerms";
 
 export default function App() {
   return (
@@ -37,6 +38,7 @@ export default function App() {
           </Route>
           <Route path="/post/:postSlug" element={<PostPage />} />
           <Route path="/categories" element={<Project />} />
+          <Route path="/policy-terms" element={<PolicyTerms />} />
         </Routes>
         <Footers />
       </HelmetProvider>

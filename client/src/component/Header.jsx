@@ -74,7 +74,7 @@ text-sm sm:text-xl font-bold dark:text-white"
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </form>
-      <Button className=" w-12 h-10 hidden sm:flex" color="gray" pill>
+      <Button className=" w-12 h-10 hidden" color="gray" pill>
         <AiOutlineSearch />
       </Button>
       <div className="flex gap-2 md:order-2">

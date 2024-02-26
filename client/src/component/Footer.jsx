@@ -98,7 +98,7 @@ text-sm sm:text-xl font-bold dark:text-white"
               <Footer.Title title="Legal" />
               <Footer.LinkGroup col>
                 <Footer.Link href="/privacy-Policy">Privacy Policy</Footer.Link>
-                <Footer.Link href="/terms-conditions">
+                <Footer.Link href="/policy-terms">
                   Terms &amp; Conditions
                 </Footer.Link>
               </Footer.LinkGroup>
