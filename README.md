@@ -45,7 +45,7 @@ Create an account to publish your own posts and interact with other users.
 
 - Create a pull request detailing your changes.
 ## License
-- This project is licensed under the MIT License.
+- This project is licensed under the MIT [License](https://github.com/eerapheal/globaltreading/blob/main/LICENSE).
 ## Contact
 - For any inquiries or feedback, please contact the project maintainer at ekpenisiraphael@gmail.com.
 
