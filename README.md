@@ -20,6 +20,10 @@ Global Treadings is a dynamic web application crafted using the MERN stack, leve
    cd client
    npm install
    npm run dev
+   
+## Live Demo
+
+Check out the live demo of the Global Treadings application [here](https://globaltreading.onrender.com).
 
 ## Usage
 Visit the live application to explore trending posts and share your ideas with the community.
