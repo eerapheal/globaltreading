@@ -1,7 +1,10 @@
+
+![Image Description](https://firebasestorage.googleapis.com/v0/b/globaltreadings.appspot.com/o/1709729634318-global%20treadings.png?alt=media&token=186a3d67-46af-46bd-9e64-302af04a6781)
+
 # Global Treadings
 
 ## Description
-The Global Treadings is a dynamic web application crafted using the MERN stack, leveraging React-Vite SSR for optimal SEO performance. With automatic crawling and indexing of all post URLs, it provides a platform for users to share their ideas with the world.
+Global Treadings is a dynamic web application crafted using the MERN stack, leveraging React-Vite SSR for optimal SEO performance. With automatic crawling and indexing of all post URLs, it provides a platform for users to share their ideas with the world.
 
 ## Features
 - Utilizes the MERN (MongoDB, Express.js, React.js, Node.js) stack for robust backend and frontend development.
@@ -14,6 +17,7 @@ The Global Treadings is a dynamic web application crafted using the MERN stack, 
    ```bash
    git clone https://github.com/eerapheal/globaltreading.git
    cd globaltreading
+   cd client
    npm install
    npm run dev
 
@@ -33,10 +37,9 @@ Create an account to publish your own posts and interact with other users.
 ```bash
    git commit -m "Your commit message"
    git push origin feature/your-feature-name
+```
 
 - Create a pull request detailing your changes.
-
-
 ## License
 - This project is licensed under the MIT License.
 ## Contact
