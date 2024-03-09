@@ -20,7 +20,7 @@ import PolicyTerms from "./pages/PolicyTerms";
 export default function App() {
   return (
     <BrowserRouter>
-      <HelmetProvider>
+      <HelmetProvider defer async>
         <ScrollTop />
         <Header />
         <Routes>
